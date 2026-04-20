@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,16 +16,20 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { typedndarray } from '@stdlib/types/ndarray';
 
 /**
-* BLAS level 1 routine to copy values from a one-dimensional ndarray `x` into a one-dimensional ndarray `y`.
+* Copies values from a one-dimensional ndarray `x` into a one-dimensional ndarray `y`.
 *
-* @module @stdlib/blas-base-ndarray-gcopy
+* @param arrays - array-like object containing an input ndarray and an output ndarray
+* @returns output ndarray
 *
 * @example
 * var ndarray = require( '@stdlib/ndarray-base-ctor' );
-* var gcopy = require( '@stdlib/blas-base-ndarray-gcopy' );
 *
 * var xbuf = [ 1.0, 2.0, 3.0, 4.0, 5.0 ];
 * var x = new ndarray( 'generic', xbuf, [ 5 ], [ 1 ], 0, 'row-major' );
@@ -39,12 +43,9 @@
 * var bool = ( z === y );
 * // returns true
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function gcopy<T extends typedndarray<number> = typedndarray<number>>( arrays: [ T, T ] ): T;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = gcopy;
