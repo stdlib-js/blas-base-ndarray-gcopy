@@ -41,14 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-base-ndarray-gcopy
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import gcopy from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-gcopy@deno/mod.js';
+var gcopy = require( '@stdlib/blas-base-ndarray-gcopy' );
 ```
 
 #### gcopy( arrays )
@@ -56,24 +74,24 @@ import gcopy from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-gcopy
 Copies values from a one-dimensional ndarray `x` into a one-dimensional ndarray `y`.
 
 ```javascript
-import ndarray from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ctor@deno/mod.js';
+var vector = require( '@stdlib/ndarray-vector-ctor' );
 
-var xbuf = [ 1.0, 2.0, 3.0, 4.0, 5.0 ];
-var x = new ndarray( 'generic', xbuf, [ 5 ], [ 1 ], 0, 'row-major' );
-
-var ybuf = [ 0.0, 0.0, 0.0, 0.0, 0.0 ];
-var y = new ndarray( 'generic', ybuf, [ 5 ], [ 1 ], 0, 'row-major' );
+var x = vector( [ 1.0, 2.0, 3.0, 4.0, 5.0 ], 'generic' );
+var y = vector( [ 0.0, 0.0, 0.0, 0.0, 0.0 ], 'generic' );
 
 var z = gcopy( [ x, y ] );
 // returns <ndarray>[ 1.0, 2.0, 3.0, 4.0, 5.0 ]
 
-var bool = ( y === z );
+var bool = ( z === y );
 // returns true
 ```
 
 The function has the following parameters:
 
--   **arrays**: array-like object containing an input ndarray and an output ndarray.
+-   **arrays**: array-like object containing the following ndarrays in order:
+
+    -   input ndarray
+    -   output ndarray
 
 </section>
 
@@ -92,21 +110,18 @@ The function has the following parameters:
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@deno/mod.js';
-import ndarray from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ctor@deno/mod.js';
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@deno/mod.js';
-import gcopy from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-gcopy@deno/mod.js';
+var discreteUniform = require( '@stdlib/random-discrete-uniform' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var gcopy = require( '@stdlib/blas-base-ndarray-gcopy' );
 
 var opts = {
     'dtype': 'generic'
 };
 
-var xbuf = discreteUniform( 10, 0, 100, opts );
-var x = new ndarray( opts.dtype, xbuf, [ xbuf.length ], [ 1 ], 0, 'row-major' );
+var x = discreteUniform( [ 10 ], 0, 100, opts );
 console.log( ndarray2array( x ) );
 
-var ybuf = discreteUniform( xbuf.length, 0, 10, opts );
-var y = new ndarray( opts.dtype, ybuf, [ ybuf.length ], [ 1 ], 0, 'row-major' );
+var y = discreteUniform( [ 10 ], 0, 10, opts );
 console.log( ndarray2array( y ) );
 
 var out = gcopy( [ x, y ] );
@@ -134,7 +149,7 @@ console.log( ndarray2array( out ) );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
